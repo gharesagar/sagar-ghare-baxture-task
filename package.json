@@ -7,7 +7,8 @@
   "scripts": {
     "start:dev": "nodemon src/index.js",
     "start:prod": "npm run build && node dist/index.js",
-    "build": "mkdir dist && copy src\\index.js dist\\"
+    "build": "mkdir dist && copy src\\index.js dist\\",
+    "start:multi": "node src/cluster.js"
   },
   "author": "",
   "license": "ISC",
