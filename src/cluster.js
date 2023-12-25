@@ -1,20 +1,22 @@
 import cluster from "cluster";
 import os from "os";
 import app from "./index.js";
+import { loadbalancer } from "./loadbalancer.js";
 
-const toBoolean = value => value.trim() == "true" ? true : false;
+const workers = [];
+let numCPUs = os.cpus().length;
 
-const port = process.env.PORT || 3000;
+const toBoolean = (value) => (value.trim() == "true" ? true : false);
+
+let port = process.env.PORT || 3000;
+
 
 if (toBoolean(process.env.clusteringRequired)) {
   if (cluster.isMaster) {
-    // Master process (load balancer)
-
-    const numCPUs = os.cpus().length;
 
     for (let i = 0; i < numCPUs; i++) {
       const worker = cluster.fork();
-      console.log(`Worker ${worker.process.pid} started`);
+      workers.push(`http://localhost:${port + worker.id}`);
     }
 
     cluster.on("exit", (worker, code, signal) => {
@@ -31,7 +33,11 @@ if (toBoolean(process.env.clusteringRequired)) {
     });
   }
 
+  if (workers.length === numCPUs) {
+    loadbalancer(workers);
+  }
 } else {
+
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });

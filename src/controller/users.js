@@ -35,6 +35,7 @@ const createUser = async (req, res) => {
 
     const obj = { id: uuidv4(), username, age, hobbies, isDeleted: false };
     usersData.push(obj);
+
     createdResponse(res, USER_CREATED, obj);
   } catch (error) {
     internalServerErrorResponse(res, error.message);
@@ -130,21 +131,4 @@ export { getAllUsers, getUser, createUser, updateUser, deleteUser };
 
 
 
- // const simulateTimeTakingOperation = async () => {
-    //   return new Promise(resolve => {
-    //     setTimeout(() => {
-    //       resolve();
-    //     }, 1000); // Adjust the delay as needed (e.g., 1000 milliseconds = 1 second)
-    //   });
-    // };
-  
-    // // Simulate a loop that takes time
-    // const simulateTimeTakingLoop = async () => {
-    //   for (let i = 0; i < 5; i++) {
-    //     console.log(`Iteration ${i + 1} started`);
-    //     await simulateTimeTakingOperation();
-    //     console.log(`Iteration ${i + 1} completed`);
-    //   }
-    // };
-    
-    // await simulateTimeTakingLoop();
+ 
