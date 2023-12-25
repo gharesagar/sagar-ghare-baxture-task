@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start:dev": "nodemon src/index.js",
-    "start:prod": "npm run build && node dist/index.js",
-    "build": "mkdir dist && copy src\\index.js dist\\",
-    "start:multi": "node src/cluster.js"
+    "start:dev": "SET clusteringRequired=false && nodemon --exec ./node_modules/.bin/babel-node src/cluster.js",
+    "start:prod": "SET clusteringRequired=false && npm run build && node ./build/src/cluster.js",
+    "build": "npm run clean && npm run build-babel", 
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./ -s --ignore node_modules",
+    "start:multi": "SET clusteringRequired=true && nodemon --exec ./node_modules/.bin/babel-node src/cluster.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,10 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.6",
+    "@babel/node": "^7.22.19",
+    "@babel/preset-env": "^7.23.6",
     "nodemon": "^3.0.2"
   }
 }

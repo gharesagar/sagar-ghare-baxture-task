@@ -1,0 +1,16 @@
+"start:dev": "SET clusteringRequired=false && nodemon --exec ./node_modules/.bin/babel-node src/cluster.js",
+    
+"start:prod": "SET clusteringRequired=false && npm run build && node ./build/src/cluster.js",
+== node ./build/src/cluster.js == Entering into build folder and running the script from /src/cluster.js 
+
+"build": "npm run clean && npm run build-babel", 
+== Clean older build and making new build
+
+"clean": "rm -rf build && mkdir build",
+    
+"build-babel": "babel -d ./build ./ -s --ignore node_modules",
+== Copying all codebase except node_modules
+
+
+"start:multi": "SET clusteringRequired=true && nodemon --exec ./node_modules/.bin/babel-node src/cluster.js"
+  

@@ -36,8 +36,5 @@ app.use((err, req, res, next) => {
   internalServerErrorResponse(res, INTERNAL_SERVER_ERROR)
 });
 
-app.listen(port, ()=> {
-  console.log(`Server is running on port ${port}`);
-});
 
 export default app;
