@@ -6,7 +6,10 @@ const responseMessages = {
   "USER_DATA_FETCH" : "User data fetch successfully",
   "NO_USER" : "User not found",
   "USER_UPDATED_SUCCESSFULLY" : "User updated successfully",
-  "USER_DELETED_SUCCESSFULLY" : "User deleted successfully"
+  "USER_DELETED_SUCCESSFULLY" : "User deleted successfully",
+  "NOT_FOUND_URL_API_USERS" : "Not Found - The requested resource within /api/users could not be found.",
+  "NOT_FOUND_URL_GENERAL" : "Not Found - The requested resource could not be found.",
+  "INTERNAL_SERVER_ERROR" : "Internal Server Error - Something went wrong on the server."
 }
 
 

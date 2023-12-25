@@ -72,14 +72,13 @@ const getAllUsers = (req, res) => {
   try {
     let response = {};
 
-    const modifiedData = usersData
-      .filter((user) => !user.isDeleted)
-      // .map(({ id, username, age, hobbies }) => ({
-      //   id,
-      //   username,
-      //   age,
-      //   hobbies,
-      // }));
+    const modifiedData = usersData.filter((user) => !user.isDeleted);
+    // .map(({ id, username, age, hobbies }) => ({
+    //   id,
+    //   username,
+    //   age,
+    //   hobbies,
+    // }));
 
     if (modifiedData && modifiedData.length > 0) {
       response = { message: USERS_DATA_FETCH, data: modifiedData };
@@ -99,10 +98,9 @@ const getUser = (req, res) => {
 
     const foundUser = findUserById(userId);
 
-    if (foundUser) {
+    if (foundUser && !foundUser.isDeleted) {
       successResponse(res, USER_DATA_FETCH, foundUser);
     } else {
-      console.log("User not found.");
       notFoundResponse(res, NO_USER);
     }
   } catch (error) {
